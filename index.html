@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Event Registration</h1>
+        <form id="registration-form">
+            <div class="personal-info">
+                <h2>Personal Information</h2>
+                <div>
+                    <label for="uid">UID:</label>
+                    <input type="text" id="uid" name="uid" required>
+                </div>
+                <div>
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required minlength="2" maxlength="50">
+                </div>
+                <div>
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required minlength="2" maxlength="50">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="phone">Contact Number:</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" title="Please enter a 10-digit phone number">
+                </div>
+                <div>
+                    <label for="organization">Name of Organization/School/College/Society:</label>
+                    <input type="text" id="organization" name="organization" required>
+                </div>
+                <div>
+                    <label for="bandId">Band ID:</label>
+                    <input type="text" id="bandId" name="bandId">
+                </div>
+                <div>
+                    <label>What days will you attend the event?</label>
+                    <div>
+                        <input type="checkbox" id="day1" name="attendanceDays" value="Day 1">
+                        <label for="day1">Day 1</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="day2" name="attendanceDays" value="Day 2">
+                        <label for="day2">Day 2</label>
+                    </div>
+                </div>
+                <div>
+                    <label>What state do you belong to?</label>
+                    <div>
+                        <input type="radio" id="jk" name="state" value="Jammu & Kashmir" checked>
+                        <label for="jk">Jammu & Kashmir</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="other-state" name="state" value="Other">
+                        <label for="other-state">Other:</label>
+                        <input type="text" id="other-state-name" name="otherStateName" style="display: none;">
+                    </div>
+                </div>
+            </div>
+            <h2>Event Selection</h2>
+            <div id="events-container"></div>
+            <div id="price-tracker">Total Price: Rs.0</div>
+            <button type="submit">Submit Registration</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
