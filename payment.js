@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const totalPrice = urlParams.get('totalPrice');
 
-    fetch('http://192.168.185.82:3000/generate-qr', {
+    fetch('http://192.168.209.82:3000/generate-qr', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function handleVerification(isVerified) {
     });
 
     const registrationData = {
-        UID: urlParams.get('uid'),
+        
         firstName: urlParams.get('firstName'),
         lastName: urlParams.get('lastName'),
         email: urlParams.get('email'),
@@ -58,7 +58,7 @@ function handleVerification(isVerified) {
         selectedEvents: selectedEvents
     };
 
-    fetch('http://192.168.185.82:3000/verify-registration', {
+    fetch('http://192.168.209.82:3000/verify-registration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const userId= document.getElementById('uid')
+    
     const eventsContainer = document.getElementById('events-container');
     const registrationForm = document.getElementById('registration-form');
     const priceTracker = document.getElementById('price-tracker');

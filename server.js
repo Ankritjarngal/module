@@ -55,12 +55,17 @@ app.post('/generate-qr', (req, res) => {
 });
 
 app.post('/verify-registration', async (req, res) => {
-    const { UID,firstName, lastName, email, phone, organization, state, selectedEvents, bandId } = req.body;
+    const {firstName, lastName, email, phone, organization, state, selectedEvents, bandId } = req.body;
     let connection;
     
     try {
         connection = await pool.getConnection();
         await connection.beginTransaction();
+
+        // Fetch the maximum UID from the attendees table
+        const [maxUidResult] = await connection.query('SELECT MAX(UID) as maxUid FROM attendees');
+        const maxUid = maxUidResult[0].maxUid || 0;  // If table is empty, start from 0
+        const newUid = maxUid + 3;  // Generate the next UID by adding 3
 
         const insertAttendeeQuery = `
             INSERT INTO attendees 
@@ -69,7 +74,7 @@ app.post('/verify-registration', async (req, res) => {
         `;
         
         await connection.query(insertAttendeeQuery, [
-            UID,
+            newUid,
             firstName,
             lastName,
             email,
@@ -85,14 +90,14 @@ app.post('/verify-registration', async (req, res) => {
         `;
 
         for (const eventId of selectedEvents) {
-            await connection.query(participatingInsertQuery, [eventId, UID]);
+            await connection.query(participatingInsertQuery, [eventId, newUid]);
         }
 
         await connection.commit();
         
         res.json({
             success: true,
-            userId: UID,
+            userId: newUid,
             bandId: bandId,
             message: 'Registration and event participation recorded successfully'
         });
